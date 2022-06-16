@@ -67,6 +67,20 @@ public class PhoneController {
 	}
 	
 	
+	// 전화번호 삭제
+	@RequestMapping(value = "/delete", method = { RequestMethod.GET, RequestMethod.POST })
+	public String delete(@RequestParam("no") int no) {
+		System.out.println("PhoneController>delete()");
+
+		// Service를 통해서 삭제한다
+		int count = phoneService.personDelete(no);
+
+		return "redirect:/list";
+	}
+
+	
+	
+	
 	
 	
 	
@@ -103,20 +117,7 @@ public class PhoneController {
 	}
 	
 	
-	// 전화번호 삭제
-	@RequestMapping(value = "/delete", method = { RequestMethod.GET, RequestMethod.POST })
-	public String delete(@RequestParam("no") int no) {
-		System.out.println("PhoneController>delete()");
-
-		// 파라미터 꺼내기
-		System.out.println(no);
-
-		// Service를 통해서 삭제한다
-		int count = phoneService.personDelete(no);
-
-		return "redirect:/list";
-	}
-
+	
 	
 	//전화번호 삭제(@PathVariable 사용)
 	@RequestMapping(value="/delete2/{no}", method={RequestMethod.GET, RequestMethod.POST})
@@ -132,7 +133,6 @@ public class PhoneController {
 		
 		return "redirect:/list";
 	}
-	
 	
 	// 전화번호 수정폼
 	@RequestMapping(value = "/updateForm", method = { RequestMethod.GET, RequestMethod.POST })
@@ -150,6 +150,8 @@ public class PhoneController {
 
 		return "updateForm";
 	}
+	
+	
 
 	// 전화번호 수정
 	@RequestMapping(value = "/update", method = { RequestMethod.GET, RequestMethod.POST })
@@ -164,5 +166,7 @@ public class PhoneController {
 
 		return "redirect:/list";
 	}
+	
+
 
 }
